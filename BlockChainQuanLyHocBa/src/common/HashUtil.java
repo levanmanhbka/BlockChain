@@ -1,6 +1,11 @@
 package common;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
+
+import model.MSubject;
+import model.MarkBlock;
+import model.Student;
 
 public class HashUtil {
 	public static String applySha256(String input) {
@@ -16,8 +21,47 @@ public class HashUtil {
 			}
 			return hexString.toString();
 		} catch (Exception e) {
-				
+
 		}
 		return null;
+	}
+
+	public static boolean isMarkBlockChainValid(ArrayList<MarkBlock> blockChain) {
+		if (blockChain.size() > 1) {
+			for (int i = 1; i <= blockChain.size() - 1; i++) {
+				MarkBlock currentBlock = blockChain.get(i - 1);
+				MarkBlock nextBlock = blockChain.get(i);
+				if (!(nextBlock.getPrevHash().equals(currentBlock.toHashString()))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public static boolean isStudentBlockChainValid(ArrayList<Student> blockChain) {
+		if (blockChain.size() > 1) {
+			for (int i = 1; i <= blockChain.size() - 1; i++) {
+				Student currentBlock = blockChain.get(i - 1);
+				Student nextBlock = blockChain.get(i);
+				if (!(nextBlock.getPrevHash().equals(currentBlock.toHashString()))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public static boolean isSubjectBlockChainValid(ArrayList<MSubject> blockChain) {
+		if (blockChain.size() > 1) {
+			for (int i = 1; i <= blockChain.size() - 1; i++) {
+				MSubject currentBlock = blockChain.get(i - 1);
+				MSubject nextBlock = blockChain.get(i);
+				if (!(nextBlock.getPrevHash().equals(currentBlock.toHashString()))) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

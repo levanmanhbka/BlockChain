@@ -16,7 +16,10 @@ import model.MarkBlock;
 import model.Student;
 
 public class FileManager {
-	public static final String ORIGINAL_PATH = "E:\\AI\\data";
+	public static final String ORIGINAL_PATH_DATA = "D:\\AI\\data";
+	public static final String ORIGINAL_PATH_BACKUP = "D:\\AI\\backup";
+	
+	public static String ORIGINAL_PATH = ORIGINAL_PATH_DATA;
 
 	public boolean WriteStringToFile(String content, String filePath, String fileName) {
 		try {
