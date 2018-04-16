@@ -1,5 +1,7 @@
 package model;
 
+import org.json.simple.JSONObject;
+
 import common.HashUtil;
 
 public class MarkBlock {
@@ -54,4 +56,14 @@ public class MarkBlock {
 	{
 		return HashUtil.applySha256(studentId + subjectId + midleMark + endMark + prevHash);
 	}
+	
+	public String ToJsonString() {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("studentId", studentId);
+		jsonObject.put("subjectId", subjectId);
+		jsonObject.put("midleMark", new Double(midleMark));
+		jsonObject.put("endMark", new Double(endMark));
+		jsonObject.put("prevHash", prevHash);
+		return jsonObject.toString();
+	}	
 }

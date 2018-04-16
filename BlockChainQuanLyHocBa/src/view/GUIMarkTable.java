@@ -102,6 +102,10 @@ public class GUIMarkTable extends JFrame {
 		contentPane.add(btnAdd);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnDelete.setBounds(283, 337, 89, 23);
 		contentPane.add(btnDelete);
 	}
