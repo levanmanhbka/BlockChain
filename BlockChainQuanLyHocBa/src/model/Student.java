@@ -1,5 +1,7 @@
 package model;
 
+import org.json.simple.JSONObject;
+
 import common.HashUtil;
 
 public class Student {
@@ -42,5 +44,13 @@ public class Student {
 	public String toHashString()
 	{
 		return HashUtil.applySha256(name + id + birth+ prevHash);
+	}
+	public String ToJsonString() {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("name", name);
+		jsonObject.put("id", id);
+		jsonObject.put("birth", new Long(birth));
+		jsonObject.put("prevHash", prevHash);
+		return jsonObject.toString();
 	}
 }

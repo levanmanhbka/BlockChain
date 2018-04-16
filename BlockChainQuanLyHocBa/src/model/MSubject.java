@@ -1,13 +1,15 @@
 package model;
 
+import org.json.simple.JSONObject;
+
 import common.HashUtil;
 
-public class Subject {
+public class MSubject {
 	private String name;
 	private String id;
 	private String prevHash;
 	
-	public Subject(String name, String id, String prevHash) {
+	public MSubject(String name, String id, String prevHash) {
 		this.name = name;
 		this.id = id;
 		this.prevHash = prevHash;
@@ -40,5 +42,13 @@ public class Subject {
 	public String toHashString()
 	{
 		return HashUtil.applySha256(name + id + prevHash);
+	}
+	
+	public String ToJsonString() {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("name", name);
+		jsonObject.put("id", id);
+		jsonObject.put("prevHash", prevHash);
+		return jsonObject.toString();
 	}
 }
