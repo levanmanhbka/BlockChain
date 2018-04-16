@@ -6,12 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+
+import model.MarkBlock;
+
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class GUIMarkTable extends JFrame {
@@ -22,7 +29,9 @@ public class GUIMarkTable extends JFrame {
 	private JTextField textFieldSubject;
 	private JTextField textFieldMidle;
 	private JTextField textFieldEnd;
-
+	
+	private ArrayList<MarkBlock> markBlocks; //manh.lv
+	
 	/**
 	 * Launch the application.
 	 */
@@ -43,6 +52,8 @@ public class GUIMarkTable extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIMarkTable() {
+		markBlocks = new ArrayList<>(); //manh.lv
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 479, 398);
 		contentPane = new JPanel();
@@ -55,6 +66,8 @@ public class GUIMarkTable extends JFrame {
 		contentPane.add(scrollPane);
 		
 		tableMark = new JTable();
+		tableMark.setModel(new DefaultTableModel(new Object[][] {}, //manh.lv
+				new String[] { "Student ID", "Subject ID", "Midle Mark", "End Mark" }));
 		scrollPane.setViewportView(tableMark);
 		
 		JLabel lblStudent = new JLabel("Student");
@@ -96,6 +109,16 @@ public class GUIMarkTable extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String studentId = textFieldStudent.getText().toString();
+				String subjectId = textFieldSubject.getText().toString();
+				double midleMark = Double.parseDouble(textFieldMidle.getText().toString());
+				double endMark = Double.parseDouble(textFieldEnd.getText().toString());
+				String  prevHash = "0";
+				if(markBlocks.size() > 0)
+					prevHash = markBlocks.get(markBlocks.size()-1).toHashString();
+				MarkBlock block = new MarkBlock(studentId, subjectId, midleMark, endMark, prevHash);
+				markBlocks.add(block);
+				UpdateTableView();
 			}
 		});
 		btnAdd.setBounds(154, 337, 89, 23);
@@ -110,4 +133,24 @@ public class GUIMarkTable extends JFrame {
 		contentPane.add(btnDelete);
 	}
 
+	public void SetMarkBlockChain(ArrayList<MarkBlock> arrayList) { //manh.lv
+		this.markBlocks = arrayList;
+		UpdateTableView();
+	}
+	
+	public void UpdateTableView() { //manh.lv
+		tableMark.removeAll();
+		tableMark.setModel(new DefaultTableModel(new Object[][] {}, 
+				new String[] { "Student ID", "Subject ID", "Midle Mark", "End Mark" }));
+		
+		DefaultTableModel model = (DefaultTableModel) tableMark.getModel();
+		Object[] row = new Object[4];
+		for(int i=0; i< markBlocks.size(); i++) {
+			row[0] = ""+markBlocks.get(i).getStudentId();
+			row[1] = ""+markBlocks.get(i).getSubjectId();
+			row[2] = ""+markBlocks.get(i).getMidleMark();
+			row[3] = ""+markBlocks.get(i).getEndMark();
+			model.addRow(row);
+		}
+	}
 }
