@@ -47,22 +47,42 @@ public class GUIMain extends JFrame {
 		contentPane.add(lblStudentMarkSystem);
 		
 		JButton btnVerify = new JButton("Verify Data Base");
+		btnVerify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnVerify.setBounds(10, 48, 113, 23);
 		contentPane.add(btnVerify);
 		
 		JButton btnBackUpDatabase = new JButton("Back Up Database");
+		btnBackUpDatabase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnBackUpDatabase.setBounds(10, 94, 119, 23);
 		contentPane.add(btnBackUpDatabase);
 		
 		JButton btnInputStudent = new JButton("Input Student");
+		btnInputStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnInputStudent.setBounds(289, 55, 119, 23);
 		contentPane.add(btnInputStudent);
 		
 		JButton btnInputSubject = new JButton("Input Subject");
+		btnInputSubject.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnInputSubject.setBounds(289, 107, 119, 23);
 		contentPane.add(btnInputSubject);
 		
 		JButton btnInputmark = new JButton("InputMark");
+		btnInputmark.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnInputmark.setBounds(289, 158, 119, 23);
 		contentPane.add(btnInputmark);
 	}

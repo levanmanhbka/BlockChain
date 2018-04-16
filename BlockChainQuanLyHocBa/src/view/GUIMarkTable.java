@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUIMarkTable extends JFrame {
 
@@ -92,6 +94,10 @@ public class GUIMarkTable extends JFrame {
 		contentPane.add(lblEndmark);
 		
 		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnAdd.setBounds(154, 337, 89, 23);
 		contentPane.add(btnAdd);
 		
